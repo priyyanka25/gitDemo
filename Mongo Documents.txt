@@ -1,0 +1,279 @@
+
+C:\Users\Administrator>mongo
+MongoDB shell version v5.0.1
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("37a63780-de9c-48a6-9c71-4b94b7c7706c") }
+MongoDB server version: 5.0.1
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+We recommend you begin using "mongosh".
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+        https://docs.mongodb.com/
+Questions? Try the MongoDB Developer Community Forums
+        https://community.mongodb.com
+---
+The server generated these startup warnings when booting:
+        2021-07-30T06:19:56.045+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> db.version()
+5.0.1
+> db.help() ----> tells all the methods of db
+DB methods:
+        db.adminCommand(nameOrDocument) - switches to 'admin' db, and runs command [just calls db.runCommand(...)]
+        db.aggregate([pipeline], {options}) - performs a collectionless aggregation on this database; returns a cursor
+        db.auth(username, password)
+        db.commandHelp(name) returns the help for the command
+        db.createUser(userDocument)
+        db.createView(name, viewOn, [{$operator: {...}}, ...], {viewOptions})
+        db.currentOp() displays currently executing operations in the db
+        db.dropDatabase(writeConcern)
+        db.dropUser(username)
+        db.eval() - deprecated
+        db.fsyncLock() flush data to disk and lock server for backups
+        db.fsyncUnlock() unlocks server following a db.fsyncLock()
+        db.getCollection(cname) same as db['cname'] or db.cname
+        db.getCollectionInfos([filter]) - returns a list that contains the names and options of the db's collections
+        db.getCollectionNames()
+        db.getLastError() - just returns the err msg string
+        db.getLastErrorObj() - return full status object
+        db.getLogComponents()
+        db.getMongo() get the server connection object
+        db.getMongo().setSecondaryOk() allow queries on a replication secondary server
+        db.getName()
+        db.getProfilingLevel() - deprecated
+        db.getProfilingStatus() - returns if profiling is on and slow threshold
+        db.getReplicationInfo()
+        db.getSiblingDB(name) get the db at the same server as this one
+        db.getWriteConcern() - returns the write concern used for any operations on this db, inherited from server object if set
+        db.hostInfo() get details about the server's host
+        db.isMaster() check replica primary status
+        db.hello() check replica primary status
+        db.killOp(opid) kills the current operation in the db
+        db.listCommands() lists all the db commands
+        db.loadServerScripts() loads all the scripts in db.system.js
+        db.logout()
+        db.printCollectionStats()
+        db.printReplicationInfo()
+        db.printShardingStatus()
+        db.printSecondaryReplicationInfo()
+        db.rotateCertificates(message) - rotates certificates, CRLs, and CA files and logs an optional message
+        db.runCommand(cmdObj) run a database command.  if cmdObj is a string, turns it into {cmdObj: 1}
+        db.serverStatus()
+        db.setLogLevel(level,<component>)
+        db.setProfilingLevel(level,slowms) 0=off 1=slow 2=all
+        db.setVerboseShell(flag) display extra information in shell output
+        db.setWriteConcern(<write concern doc>) - sets the write concern for writes to the db
+        db.shutdownServer()
+        db.stats()
+        db.unsetWriteConcern(<write concern doc>) - unsets the write concern for writes to the db
+        db.version() current version of the server
+        db.watch() - opens a change stream cursor for a database to report on all  changes to its non-system collections.
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> show collections
+> show collections
+> use dbs
+switched to db dbs
+> show collections
+> use admin
+switched to db admin
+> show collections
+system.version
+> use citi
+switched to db citi
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> db.createCollection("employees")
+{ "ok" : 1 }
+> show dbs
+admin   0.000GB
+citi    0.000GB
+config  0.000GB
+local   0.000GB
+> show collections
+employees
+> db.employees.drop()
+true
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> db.createCollection("employees")
+{ "ok" : 1 }
+> show dbs
+admin   0.000GB
+citi    0.000GB
+config  0.000GB
+local   0.000GB
+> db.dropDatabase()
+{ "ok" : 1 }
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use citihyd
+switched to db citihyd
+> db.createCollection("employees")
+{ "ok" : 1 }
+> db.createCollection("students")
+{ "ok" : 1 }
+> show dbs
+admin    0.000GB
+citihyd  0.000GB
+config   0.000GB
+local    0.000GB
+> show collections
+employees
+students
+> db.employees.drop()
+true
+> show collections
+students
+> show dbs
+admin    0.000GB
+citihyd  0.000GB
+config   0.000GB
+local    0.000GB
+> use citihyd
+switched to db citihyd
+> show collections
+students
+> db.createCollection("employees")
+{ "ok" : 1 }
+> show collections
+employees
+students
+> db.employees.insertOne({empno:123,ename:"suresh",esal:9000})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("61078ec023c2bcda789c0f97")
+}
+> db.employees.insertOne({empno:124,ename:"naresh",esal:19000})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("61078f6e23c2bcda789c0f98")
+}
+> db.employees.insertOne({empno:125,ename:"mahesh",esal:29000})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("61078fa023c2bcda789c0f99")
+}
+> db.employees.insertOne({empno:126,ename:"sandee",esal:6000,eadd:"hyd"})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("61078fe323c2bcda789c0f9a")
+}
+> db.employees.find()
+{ "_id" : ObjectId("61078ec023c2bcda789c0f97"), "empno" : 123, "ename" : "suresh", "esal" : 9000 }
+{ "_id" : ObjectId("61078f6e23c2bcda789c0f98"), "empno" : 124, "ename" : "naresh", "esal" : 19000 }
+{ "_id" : ObjectId("61078fa023c2bcda789c0f99"), "empno" : 125, "ename" : "mahesh", "esal" : 29000 }
+{ "_id" : ObjectId("61078fe323c2bcda789c0f9a"), "empno" : 126, "ename" : "sandee", "esal" : 6000, "eadd" : "hyd" }
+> db.employees.find().pretty()
+{
+        "_id" : ObjectId("61078ec023c2bcda789c0f97"),
+        "empno" : 123,
+        "ename" : "suresh",
+        "esal" : 9000
+}
+{
+        "_id" : ObjectId("61078f6e23c2bcda789c0f98"),
+        "empno" : 124,
+        "ename" : "naresh",
+        "esal" : 19000
+}
+{
+        "_id" : ObjectId("61078fa023c2bcda789c0f99"),
+        "empno" : 125,
+        "ename" : "mahesh",
+        "esal" : 29000
+}
+{
+        "_id" : ObjectId("61078fe323c2bcda789c0f9a"),
+        "empno" : 126,
+        "ename" : "sandee",
+        "esal" : 6000,
+        "eadd" : "hyd"
+}
+> db.employees.updateOne({ename:"sandee"},{esal:90000})
+uncaught exception: Error: the update operation document must contain atomic operators :
+DBCollection.prototype.updateOne@src/mongo/shell/crud_api.js:565:19
+@(shell):1:1
+> db.employees.updateOne({ename:"sandee"},{$set:{esal:90000}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.employees.find().pretty()
+{
+        "_id" : ObjectId("61078ec023c2bcda789c0f97"),
+        "empno" : 123,
+        "ename" : "suresh",
+        "esal" : 9000
+}
+{
+        "_id" : ObjectId("61078f6e23c2bcda789c0f98"),
+        "empno" : 124,
+        "ename" : "naresh",
+        "esal" : 19000
+}
+{
+        "_id" : ObjectId("61078fa023c2bcda789c0f99"),
+        "empno" : 125,
+        "ename" : "mahesh",
+        "esal" : 29000
+}
+{
+        "_id" : ObjectId("61078fe323c2bcda789c0f9a"),
+        "empno" : 126,
+        "ename" : "sandee",
+        "esal" : 90000,
+        "eadd" : "hyd"
+}
+> db.employees.deleteOne({ename:"sandee"})
+{ "acknowledged" : true, "deletedCount" : 1 }
+> db.employees.find().pretty()
+{
+        "_id" : ObjectId("61078ec023c2bcda789c0f97"),
+        "empno" : 123,
+        "ename" : "suresh",
+        "esal" : 9000
+}
+{
+        "_id" : ObjectId("61078f6e23c2bcda789c0f98"),
+        "empno" : 124,
+        "ename" : "naresh",
+        "esal" : 19000
+}
+{
+        "_id" : ObjectId("61078fa023c2bcda789c0f99"),
+        "empno" : 125,
+        "ename" : "mahesh",
+        "esal" : 29000
+}
+> db.getName() -----> returns the current DB
+> 
+
+

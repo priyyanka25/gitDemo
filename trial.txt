@@ -1,0 +1,66 @@
+import java.util.Scanner;
+
+public class Trial {
+	public static void main(String[] args) {
+		
+	// STRINGS
+		//using String Literal ====> immutable
+		String s1="hitherto";
+		
+		//s2.concat("there");
+		Scanner in=new Scanner(System.in);
+		
+		System.out.println("1. Enter the index to print the character");
+		int pos=in.nextInt()-1;
+		//System.out.println(pos);
+		if(pos<=s1.length())
+			System.out.println(s1.charAt(pos)); 
+		else
+			System.out.println("Incorrect Index");
+		
+		
+		//Q2
+		
+		
+		String s2="java standard edition";
+		String[] splitted= s2.split(" ");
+		String capitalizedString="";
+		for (String str:splitted)
+		{
+			String first=str.substring(0, 1);
+			String later=str.substring(1);
+			capitalizedString+= first.toUpperCase()+later+" ";
+		}
+		System.out.println("2. "+ capitalizedString);
+		
+		
+		
+		//Q3
+		
+		String s3="encyclopedia";
+		String s4="pad";
+		//s3.concat("there");
+		System.out.println("3. "+s3.endsWith(s4)); 
+		
+		
+		//Q4
+		String s6="citi";
+		char[] chb=s6.toCharArray();
+		int count=0;
+		
+		
+		//Q5
+		String s5="CraZZyy WOw";
+		char[] ch=s5.toCharArray();
+		System.out.print("5. ");
+		for(char c:ch)
+		{
+			if(Character.isUpperCase(c))
+				System.out.print(c+" ");
+				
+		}
+	
+
+	}
+
+}
